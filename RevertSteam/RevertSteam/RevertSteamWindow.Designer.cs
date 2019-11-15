@@ -37,49 +37,55 @@
             this.lblSteamPath = new System.Windows.Forms.Label();
             this.lblInfo = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.btnLaunchSteam = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // browseButton
+            // btnBrowse
             // 
             this.btnBrowse.Location = new System.Drawing.Point(234, 29);
-            this.btnBrowse.Name = "browseButton";
+            this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(28, 23);
             this.btnBrowse.TabIndex = 0;
             this.btnBrowse.Text = "...";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.browseButton_Click);
             // 
-            // revertButton
+            // btnRevert
             // 
-            this.btnRevert.Location = new System.Drawing.Point(12, 161);
-            this.btnRevert.Name = "revertButton";
-            this.btnRevert.Size = new System.Drawing.Size(75, 23);
+            this.btnRevert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRevert.Location = new System.Drawing.Point(12, 159);
+            this.btnRevert.Name = "btnRevert";
+            this.btnRevert.Size = new System.Drawing.Size(120, 23);
             this.btnRevert.TabIndex = 1;
-            this.btnRevert.Text = "Revert";
+            this.btnRevert.Text = "Revert packages";
             this.btnRevert.UseVisualStyleBackColor = true;
             this.btnRevert.Click += new System.EventHandler(this.revertButton_Click);
             // 
-            // patchButton
+            // btnPatch
             // 
-            this.btnPatch.Location = new System.Drawing.Point(190, 161);
-            this.btnPatch.Name = "patchButton";
-            this.btnPatch.Size = new System.Drawing.Size(75, 23);
+            this.btnPatch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPatch.Location = new System.Drawing.Point(142, 159);
+            this.btnPatch.Name = "btnPatch";
+            this.btnPatch.Size = new System.Drawing.Size(120, 23);
             this.btnPatch.TabIndex = 2;
-            this.btnPatch.Text = "Patch";
+            this.btnPatch.Text = "Patch config";
             this.btnPatch.UseVisualStyleBackColor = true;
             this.btnPatch.Click += new System.EventHandler(this.patchButton_Click);
             // 
-            // downloadProgressBar
+            // pgbDownload
             // 
-            this.pgbDownload.Location = new System.Drawing.Point(12, 190);
-            this.pgbDownload.Name = "downloadProgressBar";
-            this.pgbDownload.Size = new System.Drawing.Size(253, 23);
+            this.pgbDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pgbDownload.Location = new System.Drawing.Point(12, 188);
+            this.pgbDownload.Name = "pgbDownload";
+            this.pgbDownload.Size = new System.Drawing.Size(250, 23);
             this.pgbDownload.TabIndex = 3;
             // 
-            // browseTextBox
+            // txtSteamPath
             // 
             this.txtSteamPath.Location = new System.Drawing.Point(12, 29);
-            this.txtSteamPath.Name = "browseTextBox";
+            this.txtSteamPath.Name = "txtSteamPath";
             this.txtSteamPath.Size = new System.Drawing.Size(216, 20);
             this.txtSteamPath.TabIndex = 4;
             this.txtSteamPath.TabStop = false;
@@ -105,18 +111,33 @@
             // 
             // lblStatus
             // 
-            this.lblStatus.Location = new System.Drawing.Point(12, 220);
+            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblStatus.Location = new System.Drawing.Point(12, 214);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(253, 23);
+            this.lblStatus.Size = new System.Drawing.Size(250, 23);
             this.lblStatus.TabIndex = 8;
             this.lblStatus.Text = "Ready.";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnLaunchSteam
+            // 
+            this.btnLaunchSteam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLaunchSteam.Location = new System.Drawing.Point(12, 130);
+            this.btnLaunchSteam.Name = "btnLaunchSteam";
+            this.btnLaunchSteam.Size = new System.Drawing.Size(250, 23);
+            this.btnLaunchSteam.TabIndex = 9;
+            this.btnLaunchSteam.Text = "Launch Steam";
+            this.btnLaunchSteam.UseVisualStyleBackColor = true;
+            this.btnLaunchSteam.Click += new System.EventHandler(this.btnLaunchSteam_Click);
             // 
             // RevertSteamWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(274, 252);
+            this.ClientSize = new System.Drawing.Size(274, 246);
+            this.Controls.Add(this.btnLaunchSteam);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.lblSteamPath);
@@ -148,6 +169,7 @@
         private System.Windows.Forms.Label lblSteamPath;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Button btnLaunchSteam;
     }
 }
 

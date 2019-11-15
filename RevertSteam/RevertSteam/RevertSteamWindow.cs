@@ -42,14 +42,18 @@ namespace RevertSteam
         };
         
         readonly string sNotFoundProceed = "Could not locate steam.exe in the selected directory! Proceed?";
-        readonly string sNotFound = "Could not locate steam.exe in the selected directory! Please verify this is the correct installation folder for Steam before proceeding.";
-        readonly string sDone = "Done! Relaunch Steam and attempt to download an update; disregard this. Once it has opened into your library, click 'Patch' to prevent it from automatically updating in the future.";
+        readonly string sNotFound = "Could not locate steam.exe in the selected directory! Please verify this is the correct installation folder.";
+        readonly string sDone = "Done! Launch Steam and allow it to download and intall update - it can either throw fatal error or intall old update. \n" +
+                                "If it fails, launch Steam once more - now it should install the older version from downloaded packages properly. \n" +
+                                "When Steam finally launches with old GUI, click 'Patch' to prevent it from automatically updating in the future.";
         readonly string sPatchDone = "Patched! You may now close the program.";
         readonly string sRevertFail = "Revert failed.";
         readonly string sPatchFail = "Patch failed.";
 
         DirectoryInfo SteamPath { get; set; } = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + @"\Steam");
         DirectoryInfo SteamPackagesPath => new DirectoryInfo($@"{SteamPath}\package\");
+        string SteamExePath => $@"{SteamPath}\steam.exe";
+        string SteamConfigPath => $@"{SteamPath}\steam.cfg";
         Dictionary<object, long> FilesDownloadedInfo { get; } = new Dictionary<object, long>();
         long BytesRecieved => FilesDownloadedInfo.Values.Sum();
         long BytesTotal => 407_287_744;
@@ -74,18 +78,25 @@ namespace RevertSteam
                     SteamPath = new DirectoryInfo(folderDialog.SelectedPath);
                     txtSteamPath.Text = SteamPath.FullName;
 
-                    if (!File.Exists($@"{SteamPath}\steam.exe"))
+                    if (!File.Exists(SteamExePath))
                         MessageBox.Show(sNotFound, "Steam not found");
                 }
-            }            
+            }
+        }
+
+        private void btnLaunchSteam_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(SteamExePath))
+                MessageBox.Show(sNotFound, "Steam not found");
+            else
+                Process.Start(SteamExePath);
         }
 
         private void patchButton_Click(object sender, EventArgs e)
         {
             try
             {
-                var configPath = $@"{SteamPath}\steam.cfg";
-                File.WriteAllBytes(configPath, Properties.Resources.steam_cfg);
+                File.WriteAllBytes(SteamConfigPath, Properties.Resources.steam_cfg);
                 lblStatus.Text = sPatchDone;
             }
             catch
@@ -131,6 +142,9 @@ namespace RevertSteam
 
         void PreparePackages()
         {
+            if (File.Exists(SteamConfigPath))
+                File.Delete(SteamConfigPath);
+
             FilesDownloadedInfo.Clear();
             if (!SteamPackagesPath.Exists)
                 Directory.CreateDirectory(SteamPackagesPath.FullName);
@@ -144,7 +158,7 @@ namespace RevertSteam
 
         bool CheckIfSteamExists()
         {
-            if (!File.Exists($@"{SteamPath}\steam.exe"))
+            if (!File.Exists(SteamExePath))
                 return MessageBox.Show(sNotFoundProceed, "Steam not found", MessageBoxButtons.YesNo) == DialogResult.Yes;
 
             return true;
